@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'welcome/index'
 
-  get 'welcome/about'
+  # manually added (not created by 'rails g scaffold_controller Wiki')
+  # get "wikis/index" - Replaced by 'resources :wikis'
+  # get "wikis/edit" - Replaced by 'resources :wikis'
+  # get "wikis/show" - Replaced by 'resources :wikis'
+  # get "wikis/new" - Replaced by 'resources :wikis'
+  resources :wikis
+  # end of manually added section
+
+  get 'about' => 'welcome#about'
 
   root 'welcome#index'
 
