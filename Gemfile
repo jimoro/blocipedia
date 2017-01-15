@@ -21,7 +21,10 @@ gem 'bootstrap'
 # gem 'bootstrap-sass'
 gem 'figaro'
 gem 'pry'
+# Devise handles registration and login/logout
 gem 'devise'
+# Pundit handles authorization based on policy classes for roles
+gem 'pundit'
 
 group :development, :test do
  gem 'byebug'

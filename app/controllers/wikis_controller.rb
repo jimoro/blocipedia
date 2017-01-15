@@ -32,6 +32,8 @@ class WikisController < ApplicationController
 
   # PATCH/PUT /wikis/1
   def update
+    @wiki = Wiki.find(params[:id])   # See https://github.com/elabs/pundit
+    authorize @wiki   # See https://github.com/elabs/pundit
     if @wiki.update(wiki_params)
       redirect_to @wiki, notice: 'Wiki was successfully updated.'
     else
@@ -41,6 +43,15 @@ class WikisController < ApplicationController
 
   # DELETE /wikis/1
   def destroy
+
+    authorize @wiki  # uses wiki_policy.rb
+    # Moved variation on following logic to Pundit via wiki_policy.rb
+    # if !current_user.admin?
+    #
+    #   redirect_to wikis_url, notice: "You are not authorized."
+    #   return
+    # end
+
     @wiki.destroy
     redirect_to wikis_url, notice: 'Wiki was successfully destroyed.'
   end
