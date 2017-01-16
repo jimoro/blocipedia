@@ -32,6 +32,7 @@ group :development, :test do
  gem 'spring'
  gem 'rspec-rails'
  gem 'shoulda'
+# Faker is used with db/seeds.rb to create semi-realistic looking sample records
  gem 'faker'
  gem 'factory_girl_rails'
 end
