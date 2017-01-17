@@ -25,6 +25,8 @@ gem 'pry'
 gem 'devise'
 # Pundit handles authorization based on policy classes for roles
 gem 'pundit'
+# Stripe handles online payments
+gem 'stripe'
 
 group :development, :test do
  gem 'byebug'
