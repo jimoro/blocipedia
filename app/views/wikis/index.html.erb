@@ -5,25 +5,54 @@
 <table>
   <thead>
     <tr>
-      <th colspan="7"></th>
+      <th colspan="7">Public Wikis</th>
     </tr>
   </thead>
 
   <tbody>
     <% @wikis.each do |wiki| %>
-      <tr>
-        <td><%= wiki.title %> &nbsp </td>
-        <td> &nbsp </td>
-        <td><%= link_to 'Show', wiki %></td>
-        <td> &nbsp | &nbsp </td>
-        <td><%= link_to 'Edit', edit_wiki_path(wiki) %></td>
-        <td> &nbsp | &nbsp </td>
-        <td><%= link_to 'Destroy', wiki, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% unless wiki.private %>
+        <tr>
+          <td><%= wiki.title %> &nbsp </td>
+          <td> &nbsp </td>
+          <td><%= link_to 'Show', wiki %></td>
+          <td> &nbsp | &nbsp </td>
+          <td><%= link_to 'Edit', edit_wiki_path(wiki) %></td>
+          <td> &nbsp | &nbsp </td>
+          <td><%= link_to 'Destroy', wiki, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
+<% if current_user.premium? || current_user.admin? %>
+  <p>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="7">Private Wikis</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @wikis.each do |wiki| %>
+        <% if wiki.private && current_user == wiki.user_id %>
+          <tr>
+            <td><%= wiki.title %> &nbsp </td>
+            <td> &nbsp </td>
+            <td><%= link_to 'Show', wiki %></td>
+            <td> &nbsp | &nbsp </td>
+            <td><%= link_to 'Edit', edit_wiki_path(wiki) %></td>
+            <td> &nbsp | &nbsp </td>
+            <td><%= link_to 'Destroy', wiki, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 <br>
 
 <%= link_to 'New Wiki', new_wiki_path %>
+<p>

@@ -11,12 +11,17 @@
     </div>
   <% end %>
 
+  <div class = "form-group">
+    Title: <%= f.text_field :title %>
+    Body: <%= f.text_field :body %>
 
+    <% if current_user.admin? || current_user.premium? %>
+      <%= f.label :private, class: 'checkbox' do %>
+        <%= f.check_box :private %> Private Wiki
+      <% end %>
+    <% end %>
 
-
-  Title: <%= f.text_field :title %>
-  Body: <%= f.text_field :body %>
-
+  </div>
 
   <div class="actions">
     <%= f.submit %>

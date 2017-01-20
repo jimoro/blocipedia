@@ -23,9 +23,10 @@
       <li><%= link_to "Blocipedia", root_path %></li>
       <li><%= link_to "About", about_path %></li>
 
-
-      <% if current_user.premium? %>
-        <%= link_to "Downgrade", charge_path(1), method: :delete %>
+      <% if current_user %>
+        <% if current_user.premium? %>
+          <li><%= link_to "Downgrade", charge_path(1), method: :delete %></li>
+        <% end %>
       <% end %>
     </ul>
 

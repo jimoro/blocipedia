@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 <h1><%= @wiki.title %></h1>
 <p><%= @wiki.body %></p>
+<% if current_user.premium? || current_user.admin? %>
+  <% if @wiki.private? %>
+    <!-- Option to make Wiki public (!private) -->
+    <p><small><em>Private Wiki</em></small></p>
+  <% end %>
+<% end %>
 <%= link_to 'Edit', edit_wiki_path(@wiki) %> |
 <%= link_to 'Back', wikis_path %>

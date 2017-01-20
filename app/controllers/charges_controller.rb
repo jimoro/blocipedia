@@ -38,6 +38,7 @@ class ChargesController < ApplicationController
   end
 
   def destroy
+    
     current_user.standard!
     redirect_to wikis_path
   end
