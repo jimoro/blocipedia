@@ -38,7 +38,17 @@ class ChargesController < ApplicationController
   end
 
   def destroy
-    
+    # @wikis.each do |wiki|
+    #   if wiki.private && current_user.id == wiki.user_id
+    #     wiki.private = false
+    #   end
+    # end
+    current_user.wikis do |wiki|
+       wiki.private = false
+       wiki.save
+    end
+
+
     current_user.standard!
     redirect_to wikis_path
   end

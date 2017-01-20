@@ -37,7 +37,7 @@
 
     <tbody>
       <% @wikis.each do |wiki| %>
-        <% if wiki.private && current_user == wiki.user_id %>
+        <% if wiki.private && current_user.id == wiki.user_id %>
           <tr>
             <td><%= wiki.title %> &nbsp </td>
             <td> &nbsp </td>
