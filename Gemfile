@@ -27,6 +27,8 @@ gem 'devise'
 gem 'pundit'
 # Stripe handles online payments
 gem 'stripe'
+# Redcarpet handles parsing Markdown code and presenting it as HTML (or plain text).
+gem 'redcarpet'
 
 group :development, :test do
  gem 'byebug'

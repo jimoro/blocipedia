@@ -44,7 +44,8 @@ class ChargesController < ApplicationController
     #   end
     # end
     current_user.wikis do |wiki|
-       wiki.private = false
+       wiki.update_attributes(private: false)
+    #   wiki.private = false
        wiki.save
     end
 
