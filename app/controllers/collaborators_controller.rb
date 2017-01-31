@@ -1,60 +1,25 @@
 class CollaboratorsController < ApplicationController
-  before_action :set_collaborator, only: [:show, :edit, :update, :destroy]
 
-  # GET /collaborators
-  def index
-    @collaborators = Collaborator.all
-  end
-
-  # GET /collaborators/1
-  def show
-  end
-
-  # GET /collaborators/new
-  def new
-    @collaborator = Collaborator.new
-  end
-
-  # GET /collaborators/1/edit
-  def edit
-  end
-
-  # POST /collaborators
   def create
-    @collaborator = Collaborator.new(collaborator_params)
+    @wiki = Wiki.find(params[:wiki_id])
+    @collaborator = @wiki.collaborators.new(user_id: params[:collaborator][:user_id])
 
     if @collaborator.save
-      redirect_to @collaborator.wiki, notice: 'Collaborator was successfully created.'
+      redirect_to wiki_path(@wiki), notice: 'Collaborator was successfully created.'
     else
       render :new
     end
   end
 
-  # PATCH/PUT /collaborators/1
-  def update
-    if @collaborator.update(collaborator_params)
-      redirect_to @collaborator.wiki, notice: 'Collaborator was successfully updated.'
+  def destroy
+    @wiki = Wiki.find(params[:wiki_id])
+    @collaborator = Collaborator.find_by(wiki_id: @wiki.id, user_id: params[:id])
+    if @collaborator.destroy
+      redirect_to @wiki, notice: 'Collaborator was successfully destroyed.'
     else
+      flash[:alert] = 'There was an error removing the collaborator'
       render :edit
     end
   end
 
-  # DELETE /collaborators/1
-  def destroy
-    @collaborator.destroy
-    redirect_to collaborators.wiki, notice: 'Collaborator was successfully destroyed.'
-  end
-
-  private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_collaborator
-    @collaborator = Collaborator.find(params[:id])
-  end
-
-  # Only allow a trusted parameter "white list" through.
-  def collaborator_params
-    params.require(:collaborator).permit(:user_id, :wiki_id)
-  end
-  
 end

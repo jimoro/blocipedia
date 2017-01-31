@@ -17,6 +17,8 @@ class WikisController < ApplicationController
 
   # GET /wikis/1/edit
   def edit
+    @collaborating_users = @wiki.users
+    @users = User.all - @collaborating_users
   end
 
   # POST /wikis
@@ -44,16 +46,7 @@ class WikisController < ApplicationController
 
   # DELETE /wikis/1
   def destroy
-
-    authorize @wiki  # uses wiki_policy.rb
-    # Moved variation on following logic to Pundit via wiki_policy.rb
-    # if !current_user.admin?
-    #
-    #   redirect_to wikis_url, notice: "You are not authorized."
-    #   return
-    # end
-
-    @wiki.destroy
+    binding.pry
     redirect_to wikis_url, notice: 'Wiki was successfully destroyed.'
   end
 
