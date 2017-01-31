@@ -1,16 +1,11 @@
 <p id="notice"><%= notice %></p>
 <h1><%= @wiki.title %></h1>
 <p>
-<!--  <%= @wiki.body %>  -->
-<!--  <%= markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {}) %>  -->
-<!--  <%= markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML) %>  -->
-  <%= markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML) %>
   <%= markdown.render(@wiki.body).html_safe %>
 </p>
 
 <% if current_user.premium? || current_user.admin? %>
   <% if @wiki.private? %>
-    <!-- Option to make Wiki public (!private) -->
     <p><small><em>Private Wiki</em></small></p>
   <% end %>
 <% end %>

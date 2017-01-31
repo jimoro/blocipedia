@@ -2,11 +2,10 @@
   <% if @wiki.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@wiki.errors.count, "error") %> prohibited this wiki from being saved:</h2>
-
       <ul>
-      <% @wiki.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @wiki.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -17,13 +16,41 @@
 
     <% if current_user.admin? || current_user.premium? %>
       <%= f.label :private, class: 'checkbox' do %>
-        <%= f.check_box :private %> Private Wiki
-      <% end %>
+      <%= f.check_box :private %> Private Wiki
+    <% end %>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+<% end %>
+
+    <br /><br />
+    <b>Add a collaborator</b>
+    <%= form_for Collaborator.new do |f| %>
+      <%= f.hidden_field :wiki_id, value: @wiki.id %>
+      <%= f.collection_select :user_id, User.all, :id, :email %>
+      <%= f.submit %>
     <% end %>
 
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<% if false %>  BLOCK COMMENTED OUT
+    <br /><br />
+    <b>Remove a collaborator</b>
+    <%= form_for Collaborator.destroy do |f| %>
+      <%= f.hidden_field :wiki_id, value: @wiki.id %>
+      <%= f.collection_select :user_id, Collaborator.user, :id, :email %>
+      <%= f.submit %>
+    <% end %>
 <% end %>
+
+<% if false %>  BLOCK COMMENTED OUT
+    <br /><br />
+    <b>Remove a collaborator</b>
+    <%= form_for Collaborator.all, { :method => :delete } do |f| %>
+      <%= f.hidden_field :wiki_id, value: @wiki.id %>
+      <%= f.collection_select :user_id, Collaborator.user, :id, :email %>
+      <%= f.submit %>
+    <% end %>
+<% end %>
+
+
+  </div>
