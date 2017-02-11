@@ -52,6 +52,33 @@
     </tbody>
   </table>
 <% end %>
+
+<p>
+<table>
+  <thead>
+    <tr>
+      <th colspan="7">Collaborations</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wikis.each do |wiki| %>
+      <% if wiki.private && wiki.users.include?(user) %>
+        puts "Inside wiki.private && wiki.collaborators.include?(user) conditional"
+        <tr>
+          <td><%= wiki.title %> &nbsp </td>
+          <td> &nbsp </td>
+          <td><%= link_to 'Show', wiki %></td>
+          <td> &nbsp | &nbsp </td>
+          <td><%= link_to 'Edit', edit_wiki_path(wiki) %></td>
+          <td> &nbsp | &nbsp </td>
+          <td><%= link_to 'Destroy', wiki, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
 <br>
 
 <%= link_to 'New Wiki', new_wiki_path %>
