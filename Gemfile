@@ -12,13 +12,17 @@ group :development do
  gem 'sqlite3'
 end
 
-gem 'sass-rails', '~> 5.0'
+#gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'figaro'
 gem 'pry'
+#gem 'bootstrap-sass', '~> 3.3.6'
+#gem 'sass-rails', '>= 3.2'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'bootstrap', '~> 4.0.0.alpha6'
 # Devise handles registration and login/logout
 gem 'devise'
 # Pundit handles authorization based on policy classes for roles
